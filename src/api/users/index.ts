@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 import { axiosInstance } from "../axios";
 import { User } from "./types";
 
@@ -5,6 +7,8 @@ type UserResponse = {
   user: User;
   token: string;
 };
+
+const authToken = Cookies.get("auth_token") as string;
 
 export const signup = async (user: User): Promise<UserResponse> => {
   try {
@@ -41,7 +45,24 @@ export const login = async (
       }
     );
 
-    console.log(response.data);
+    return response.data;
+  } catch (e) {
+    if (e instanceof Error) {
+      throw new Error(e.message);
+    }
+    throw new Error();
+  }
+};
+
+export const logout = async (): Promise<void> => {
+  try {
+    const response = await axiosInstance.post(
+      "/users/logout",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
 
     return response.data;
   } catch (e) {
@@ -52,19 +73,39 @@ export const login = async (
   }
 };
 
-export const logout = async () => {
+export const logoutAllAccounts = async (): Promise<void> => {
   try {
-  } catch (e) {}
+    const response = await axiosInstance.post(
+      "/users/logout-all",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (e) {
+    if (e instanceof Error) {
+      throw new Error(e.message);
+    }
+    throw new Error();
+  }
 };
 
-export const logoutAllAccounts = async () => {
+export const getProfile = async (): Promise<UserResponse> => {
   try {
-  } catch (e) {}
-};
+    const response = await axiosInstance.get("/users/me", {
+      withCredentials: true,
+    });
 
-export const getProfile = async () => {
-  try {
-  } catch (e) {}
+    return response.data;
+  } catch (e) {
+    console.log(e);
+    if (e instanceof Error) {
+      throw new Error(e.message);
+    }
+    throw new Error();
+  }
 };
 
 export const updateAccount = async () => {
@@ -83,11 +124,6 @@ export const uploadProfileImage = async () => {
 };
 
 export const deleteProfileImage = async () => {
-  try {
-  } catch (e) {}
-};
-
-export const getProfileImage = async () => {
   try {
   } catch (e) {}
 };

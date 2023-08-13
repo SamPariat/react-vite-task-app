@@ -2,7 +2,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import EditIcon from "@mui/icons-material/Edit";
 import HomeIcon from "@mui/icons-material/Home";
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import {
   Divider,
@@ -13,8 +13,9 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LogoutDialog from "../dialog/LogoutDialog";
 
 type SideDrawerProps = {
   openDrawer: boolean;
@@ -23,6 +24,7 @@ type SideDrawerProps = {
 
 const SideDrawer = ({ openDrawer, setDrawerState }: SideDrawerProps) => {
   const navigate = useNavigate();
+  const [openLogoutDialog, setOpenLogoutDialog] = useState<boolean>(false);
 
   return (
     <Drawer
@@ -66,15 +68,7 @@ const SideDrawer = ({ openDrawer, setDrawerState }: SideDrawerProps) => {
         </ListItem>
         <Divider />
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigate("/auth")}>
-            <ListItemIcon>
-              <LoginIcon />
-            </ListItemIcon>
-            <ListItemText primary="Login" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton onClick={() => navigate("/logout")}>
+          <ListItemButton onClick={() => setOpenLogoutDialog(true)}>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
@@ -82,6 +76,10 @@ const SideDrawer = ({ openDrawer, setDrawerState }: SideDrawerProps) => {
           </ListItemButton>
         </ListItem>
       </List>
+      <LogoutDialog
+        openLogoutDialog={openLogoutDialog}
+        setOpenLogoutDialog={setOpenLogoutDialog}
+      />
     </Drawer>
   );
 };

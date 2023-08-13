@@ -10,8 +10,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState, useRef } from "react";
-import { login } from "../api/users";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { login } from "../api";
 
 const LoginPage = () => {
   const [visiblePassword, setVisiblePassword] = useState<boolean>(false);
@@ -19,11 +21,15 @@ const LoginPage = () => {
   const nameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const navigate = useNavigate();
 
   const submitFormHandler = async () => {
     if (isLogin) {
       await login(emailRef.current?.value!, passwordRef.current?.value!);
+    } else {
     }
+
+    navigate("/");
   };
 
   return (

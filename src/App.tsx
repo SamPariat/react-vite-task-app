@@ -10,7 +10,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import EditProfilePage from "./pages/EditProfile";
 import LoginPage from "./pages/Login";
 import MainPage from "./pages/Main";
-import ProfilePage from "./pages/Profile";
+import ProfilePage, { loader as profileLoader } from "./pages/Profile";
 import TasksPage from "./pages/Tasks";
 
 const App = () => {
@@ -44,7 +44,11 @@ const App = () => {
             {
               path: "profile",
               children: [
-                { index: true, element: <ProfilePage /> },
+                {
+                  index: true,
+                  element: <ProfilePage />,
+                  loader: profileLoader,
+                },
                 {
                   path: "edit",
                   element: <EditProfilePage />,

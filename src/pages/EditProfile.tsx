@@ -33,28 +33,13 @@ const EditProfilePage = () => {
       >
         <Grid container spacing={2} padding={4}>
           <Grid item xs={12} md={6}>
-            <TextField
-              label="First Name"
-              defaultValue={"First Name"}
-              required
-              fullWidth
-            />
+            <TextField label="First Name" required fullWidth />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField
-              label="Last Name"
-              defaultValue={"Last Name"}
-              required
-              fullWidth
-            />
+            <TextField label="Last Name" required fullWidth />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              label="Email"
-              defaultValue={"Email"}
-              required
-              fullWidth
-            />
+            <TextField label="Email" required fullWidth />
           </Grid>
           <Grid item xs={12}>
             <TextField label="Password" type="password" required fullWidth />

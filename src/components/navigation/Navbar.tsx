@@ -1,13 +1,12 @@
-import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
-  Avatar,
   IconButton,
+  Link as MuiLink,
   Toolbar,
   Typography,
-  Link as MuiLink,
 } from "@mui/material";
+import { useState } from "react";
 import SideDrawer from "./SideDrawer";
 
 const Navbar = () => {
@@ -26,8 +25,9 @@ const Navbar = () => {
           <Typography flexGrow={1} variant="h6">
             Task App
           </Typography>
-          <MuiLink variant="h6" underline="hover">About Us</MuiLink>
-          <Avatar>TA</Avatar>
+          <MuiLink variant="h6" underline="hover" color="inherit">
+            About Us
+          </MuiLink>
         </Toolbar>
       </AppBar>
       <SideDrawer openDrawer={openDrawer} setDrawerState={setOpenDrawer} />
