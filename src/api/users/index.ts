@@ -1,5 +1,3 @@
-import Cookies from "js-cookie";
-
 import { axiosInstance } from "../axios";
 import { User } from "./types";
 
@@ -7,8 +5,6 @@ type UserResponse = {
   user: User;
   token: string;
 };
-
-const authToken = Cookies.get("auth_token") as string;
 
 export const signup = async (user: User): Promise<UserResponse> => {
   try {

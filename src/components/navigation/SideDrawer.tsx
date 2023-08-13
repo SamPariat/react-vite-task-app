@@ -1,8 +1,8 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import CreateIcon from "@mui/icons-material/Create";
 import EditIcon from "@mui/icons-material/Edit";
 import HomeIcon from "@mui/icons-material/Home";
-import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import {
   Divider,
@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import LogoutDialog from "../dialog/LogoutDialog";
 
 type SideDrawerProps = {
@@ -39,6 +40,14 @@ const SideDrawer = ({ openDrawer, setDrawerState }: SideDrawerProps) => {
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => navigate("/tasks/create-task")}>
+            <ListItemIcon>
+              <CreateIcon />
+            </ListItemIcon>
+            <ListItemText primary="Create New Task" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>

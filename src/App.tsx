@@ -4,13 +4,15 @@ import {
   createTheme,
   useMediaQuery,
 } from "@mui/material";
-import { teal, blue } from "@mui/material/colors";
+import { blue, teal } from "@mui/material/colors";
 import { useMemo } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import CreateTaskPage from "./pages/CreateTask";
 import EditProfilePage from "./pages/EditProfile";
 import LoginPage from "./pages/Login";
 import MainPage from "./pages/Main";
 import ProfilePage, { loader as profileLoader } from "./pages/Profile";
+import TaskPage from "./pages/Task";
 import TasksPage from "./pages/Tasks";
 
 const App = () => {
@@ -57,7 +59,17 @@ const App = () => {
             },
             {
               path: "tasks",
-              children: [{ index: true, element: <TasksPage /> }],
+              children: [
+                { index: true, element: <TasksPage /> },
+                {
+                  path: "create-task",
+                  element: <CreateTaskPage />,
+                },
+                {
+                  path: ":taskId",
+                  element: <TaskPage />,
+                },
+              ],
             },
           ],
         },
