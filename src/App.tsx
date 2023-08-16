@@ -6,7 +6,12 @@ import {
 } from "@mui/material";
 import { blue, teal } from "@mui/material/colors";
 import { useMemo } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
+
 import CreateTaskPage from "./pages/CreateTask";
 import EditProfilePage from "./pages/EditProfile";
 import LoginPage from "./pages/Login";
@@ -14,6 +19,7 @@ import MainPage from "./pages/Main";
 import ProfilePage, { loader as profileLoader } from "./pages/Profile";
 import TaskPage from "./pages/Task";
 import TasksPage from "./pages/Tasks";
+import HomePage from "./pages/Home";
 
 const App = () => {
   const darkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -43,6 +49,8 @@ const App = () => {
         {
           element: <MainPage />,
           children: [
+            { index: true, element: <Navigate to="home" /> },
+            { path: "home", element: <HomePage /> },
             {
               path: "profile",
               children: [

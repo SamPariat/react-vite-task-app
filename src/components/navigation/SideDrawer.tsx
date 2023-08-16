@@ -35,7 +35,7 @@ const SideDrawer = ({ openDrawer, setDrawerState }: SideDrawerProps) => {
     >
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigate("/")}>
+          <ListItemButton onClick={() => navigate("/home")}>
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>

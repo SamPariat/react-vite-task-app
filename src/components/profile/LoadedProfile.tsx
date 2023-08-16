@@ -12,7 +12,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useState, MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ImageMenu from "../menu/ImageMenu";
 
@@ -26,6 +26,7 @@ type LoadedProfileProps = {
 
 const LoadedProfile = ({ name, email, age, id, since }: LoadedProfileProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
   const openImageMenu = Boolean(anchorEl);
 
   const handleOpen = (event: MouseEvent<HTMLDivElement>) => {

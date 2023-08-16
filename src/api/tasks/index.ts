@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+
 import { axiosInstance } from "../axios";
 import type { Task } from "./types";
 
@@ -19,10 +21,10 @@ export const createNewTask = async (
 
     return response.data;
   } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(e.message);
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
     }
-    throw new Error();
+    throw new AxiosError();
   }
 };
 
@@ -34,10 +36,10 @@ export const getTasks = async (url: string): Promise<Array<Task>> => {
 
     return response.data;
   } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(e.message);
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
     }
-    throw new Error();
+    throw new AxiosError();
   }
 };
 
@@ -49,10 +51,10 @@ export const getTaskById = async (taskId: string): Promise<Task | null> => {
 
     return response.data;
   } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(e.message);
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
     }
-    throw new Error();
+    throw new AxiosError();
   }
 };
 
@@ -67,10 +69,10 @@ export const updateTask = async (
 
     return response.data;
   } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(e.message);
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
     }
-    throw new Error();
+    throw new AxiosError();
   }
 };
 
@@ -82,9 +84,9 @@ export const deleteTask = async (taskId: string): Promise<Task | null> => {
 
     return response.data;
   } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(e.message);
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
     }
-    throw new Error();
+    throw new AxiosError();
   }
 };

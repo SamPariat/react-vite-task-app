@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+
 import { axiosInstance } from "../axios";
 import { User } from "./types";
 
@@ -18,10 +20,10 @@ export const signup = async (user: User): Promise<UserResponse> => {
 
     return response.data;
   } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(e.message);
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
     }
-    throw new Error();
+    throw new AxiosError();
   }
 };
 
@@ -43,10 +45,10 @@ export const login = async (
 
     return response.data;
   } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(e.message);
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
     }
-    throw new Error();
+    throw new AxiosError();
   }
 };
 
@@ -62,10 +64,10 @@ export const logout = async (): Promise<void> => {
 
     return response.data;
   } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(e.message);
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
     }
-    throw new Error();
+    throw new AxiosError();
   }
 };
 
@@ -81,10 +83,10 @@ export const logoutAllAccounts = async (): Promise<void> => {
 
     return response.data;
   } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(e.message);
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
     }
-    throw new Error();
+    throw new AxiosError();
   }
 };
 
@@ -97,10 +99,10 @@ export const getProfile = async (): Promise<UserResponse> => {
     return response.data;
   } catch (e) {
     console.log(e);
-    if (e instanceof Error) {
-      throw new Error(e.message);
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
     }
-    throw new Error();
+    throw new AxiosError();
   }
 };
 
@@ -114,12 +116,36 @@ export const deleteAccount = async () => {
   } catch (e) {}
 };
 
-export const uploadProfileImage = async () => {
+export const uploadProfileImage = async (formData: FormData): Promise<void> => {
   try {
-  } catch (e) {}
+    const response = await axiosInstance.post(
+      "/users/me/profile-img",
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
+    }
+    throw new AxiosError();
+  }
 };
 
-export const deleteProfileImage = async () => {
+export const deleteProfileImage = async (): Promise<void> => {
   try {
-  } catch (e) {}
+    const response = await axiosInstance.delete("/users/me/profile-img", {
+      withCredentials: true,
+    });
+
+    return response.data;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
+    }
+    throw new AxiosError();
+  }
 };
