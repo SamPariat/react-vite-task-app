@@ -8,6 +8,13 @@ type UserResponse = {
   token: string;
 };
 
+type UpdateType = {
+  name?: string;
+  email?: string;
+  password?: string;
+  age?: unknown;
+};
+
 export const signup = async (user: User): Promise<UserResponse> => {
   try {
     // Remove unused fields from the request body
@@ -98,7 +105,6 @@ export const getProfile = async (): Promise<UserResponse> => {
 
     return response.data;
   } catch (e) {
-    console.log(e);
     if (e instanceof AxiosError) {
       throw new AxiosError(e.message);
     }
@@ -106,14 +112,42 @@ export const getProfile = async (): Promise<UserResponse> => {
   }
 };
 
-export const updateAccount = async () => {
+export const updateAccount = async (
+  updates: UpdateType
+): Promise<UserResponse> => {
+  for (const update in updates) {
+    if (updates[update as keyof UpdateType] === undefined) {
+      delete updates[update as keyof UpdateType];
+    }
+  }
+
   try {
-  } catch (e) {}
+    const response = await axiosInstance.patch("/users/me", updates, {
+      withCredentials: true,
+    });
+
+    return response.data;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
+    }
+    throw new AxiosError();
+  }
 };
 
-export const deleteAccount = async () => {
+export const deleteAccount = async (): Promise<UserResponse> => {
   try {
-  } catch (e) {}
+    const response = await axiosInstance.delete("/users/me", {
+      withCredentials: true,
+    });
+
+    return response.data;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      throw new AxiosError(e.message);
+    }
+    throw new AxiosError();
+  }
 };
 
 export const uploadProfileImage = async (formData: FormData): Promise<void> => {

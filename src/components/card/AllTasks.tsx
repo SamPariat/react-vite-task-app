@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getTasks } from "../../api";
 import type { Task } from "../../api/tasks/types";
 import TaskCard from "./TaskCard";
+import TaskSkeleton from "./TaskSkeleton";
 
 type AllTasksProps = {
   url: string;
@@ -23,16 +24,27 @@ const AllTasks = ({ url }: AllTasksProps) => {
 
   return (
     <Grid container spacing={2} paddingX={2}>
-      {tasks?.map((task) => (
-        <Grid item xs={6} key={task._id}>
-          <TaskCard
-            completed={task.completed}
-            description={task.description}
-            createdAt={task.createdAt}
-            id={task._id}
-          />
-        </Grid>
-      ))}
+      {tasks ? (
+        tasks?.map((task) => (
+          <Grid item xs={6} key={task._id}>
+            <TaskCard
+              completed={task.completed}
+              description={task.description}
+              createdAt={task.createdAt}
+              id={task._id}
+            />
+          </Grid>
+        ))
+      ) : (
+        <>
+          <Grid item xs={6}>
+            <TaskSkeleton />
+          </Grid>
+          <Grid item xs={6}>
+            <TaskSkeleton />
+          </Grid>
+        </>
+      )}
     </Grid>
   );
 };

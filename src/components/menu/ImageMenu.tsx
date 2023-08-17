@@ -35,7 +35,11 @@ const ImageMenu = ({
     <>
       <Menu open={openImageMenu} onClose={handleClose} anchorEl={anchorElement}>
         <MenuList dense>
-          <MenuItem>
+          <MenuItem
+            sx={{
+              cursor: "pointer",
+            }}
+          >
             <label htmlFor="upload-image">
               <ListItemText>Upload image</ListItemText>
               <Input

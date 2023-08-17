@@ -1,4 +1,3 @@
-import EditIcon from "@mui/icons-material/Edit";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -6,14 +5,12 @@ import {
   Avatar,
   Badge,
   Chip,
-  Fab,
   Grid,
   Link as MuiLink,
   Stack,
   Typography,
 } from "@mui/material";
 import { MouseEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import ImageMenu from "../menu/ImageMenu";
 
 type LoadedProfileProps = {
@@ -37,7 +34,6 @@ const LoadedProfile = ({ name, email, age, id, since }: LoadedProfileProps) => {
     setAnchorEl(null);
   };
 
-  const navigate = useNavigate();
   const initials = name.split(" ");
   const noNameString = initials.join();
   const formattedDate = new Date(since).toLocaleDateString();
@@ -76,7 +72,6 @@ const LoadedProfile = ({ name, email, age, id, since }: LoadedProfileProps) => {
           <Typography variant="h4" gutterBottom>
             {name}
           </Typography>
-          <Typography variant="body1">He/Him</Typography>
           <Typography variant="body1">Since {formattedDate}</Typography>
           <Typography variant="body1">{email}</Typography>
           <Typography variant="body2">{age}</Typography>
@@ -106,17 +101,6 @@ const LoadedProfile = ({ name, email, age, id, since }: LoadedProfileProps) => {
             </MuiLink>
           </Stack>
         </Stack>
-      </Grid>
-      <Grid item xs={12}>
-        <Fab
-          variant="extended"
-          size="medium"
-          color="secondary"
-          onClick={() => navigate("edit")}
-        >
-          <EditIcon sx={{ marginRight: 1 }} />
-          Edit
-        </Fab>
       </Grid>
     </Grid>
   );

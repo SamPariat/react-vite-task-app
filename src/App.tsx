@@ -13,13 +13,15 @@ import {
 } from "react-router-dom";
 
 import CreateTaskPage from "./pages/CreateTask";
+import DeleteAccountPage from "./pages/DeleteAccount";
 import EditProfilePage from "./pages/EditProfile";
+import HomePage from "./pages/Home";
 import LoginPage from "./pages/Login";
 import MainPage from "./pages/Main";
 import ProfilePage, { loader as profileLoader } from "./pages/Profile";
+import SettingsPage from "./pages/Settings";
 import TaskPage from "./pages/Task";
 import TasksPage from "./pages/Tasks";
-import HomePage from "./pages/Home";
 
 const App = () => {
   const darkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -60,8 +62,12 @@ const App = () => {
                   loader: profileLoader,
                 },
                 {
-                  path: "edit",
-                  element: <EditProfilePage />,
+                  path: "settings",
+                  element: <SettingsPage />,
+                  children: [
+                    { path: "edit-details", element: <EditProfilePage /> },
+                    { path: "delete-account", element: <DeleteAccountPage /> },
+                  ],
                 },
               ],
             },
